@@ -31,7 +31,7 @@ It can perform **system tasks, translations, weather reports, and much more** â€
 
 ```bash
 # Clone this repo
-git clone https://github.com/your-username/jarvis-2.0.git
+git clone https://github.com/itz-Harsh/JARVIS-2.0.git
 cd jarvis-2.0
 
 # Create virtual environment
