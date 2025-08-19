@@ -1,0 +1,8 @@
+google-generativeai
+python-dotenv
+pyttsx3
+speechrecognition
+pyautogui
+wikipedia
+requests
+langdetect
