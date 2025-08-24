@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>JARVIS 2.0 COMMANDS</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<header class="hero">
+			<h1 class="neon">JARVIS 2.0 <span class="muted">COMMANDS</span></h1>
+			<p class="tagline">Voice commands reference — clear, quick and ready to use 🎙️</p>
+			<div class="controls">
+				<input id="search" placeholder="Search commands (e.g. screenshot, translate, weather)" autocomplete="off">
+			</div>
+		</header>
+
+		<main class="grid">
+			<!-- Card: General -->
+			<section class="card" data-section="general">
+				<h2>General</h2>
+				<p class="note">Power off or control session flow.</p>
+				<ul>
+					<li><code>exit</code> / <code>quit</code> / <code>goodbye</code> — stop the assistant</li>
+					<li><code>wish me</code> — friendly greeting</li>
+					<li><code>reset memory</code> / <code>clear memory</code> — clear AI chat history</li>
+				</ul>
+			</section>
+
+			<!-- Card: Web & App Control -->
+			<section class="card" data-section="web">
+				<h2>Web & App Control</h2>
+				<p class="note">Open or close apps and perform web searches.</p>
+				<ul>
+					<li><code>open [app/website]</code> — launch an application or site</li>
+					<li><code>close [app]</code> — close an application</li>
+					<li><code>search [query]</code> — search the web or YouTube</li>
+				</ul>
+			</section>
+
+			<!-- Card: Wikipedia & Info -->
+			<section class="card" data-section="wiki">
+				<h2>Wikipedia & Info</h2>
+				<p class="note">Quick facts and short summaries.</p>
+				<ul>
+					<li><code>wikipedia [topic]</code> — read a short summary</li>
+				</ul>
+			</section>
+
+			<!-- Card: Translation & Notes -->
+			<section class="card" data-section="translate">
+				<h2>Translation & Notes</h2>
+				<p class="note">Translate text or dictate to Notepad.</p>
+				<ul>
+					<li><code>translate [text] in [language]</code> — get a translation</li>
+					<li><code>write a note</code> / <code>write to file</code> — open Notepad and write</li>
+					<li><code>write what I say</code> — dictation mode (say 'stop writing' to stop)</li>
+				</ul>
+			</section>
+
+			<!-- Card: Messaging -->
+			<section class="card" data-section="messaging">
+				<h2>Messaging</h2>
+				<p class="note">Send text or WhatsApp messages using contacts file.</p>
+				<ul>
+					<li><code>send message to [name] [message]</code></li>
+					<li><code>send whatsapp message to [name] [message]</code></li>
+				</ul>
+			</section>
+
+			<!-- Card: Screenshots & Multimedia -->
+			<section class="card" data-section="media">
+				<h2>Screenshots & Multimedia</h2>
+				<p class="note">Capture or control media playback.</p>
+				<ul>
+					<li><code>screenshot</code> / <code>take screenshot</code> — save a screenshot</li>
+					<li><code>show screenshots</code> — open screenshots folder</li>
+					<li><code>play music</code> / <code>stop music</code> / <code>pause music</code></li>
+				</ul>
+			</section>
+
+			<!-- Card: System Controls -->
+			<section class="card" data-section="system">
+				<h2>System Controls</h2>
+				<p class="note">Adjust hardware controls and power state.</p>
+				<ul>
+					<li><code>volume up</code> / <code>volume down</code> / <code>mute</code></li>
+					<li><code>brightness up</code> / <code>brightness down</code></li>
+					<li><code>time</code> / <code>date</code> — speak current time/date</li>
+					<li><code>shutdown the system</code> / <code>restart the system</code></li>
+					<li><code>sign out</code> / <code>log off</code></li>
+					<li><code>cpu usage</code> / <code>system usage</code> — check CPU/RAM</li>
+				</ul>
+			</section>
+
+			<!-- Card: Weather -->
+			<section class="card" data-section="weather">
+				<h2>Weather</h2>
+				<p class="note">Get live weather for a city.</p>
+				<ul>
+					<li><code>weather in [city]</code></li>
+				</ul>
+			</section>
+
+			<!-- Card: AI Standby -->
+			<section class="card" data-section="ai">
+				<h2>AI Standby</h2>
+				<p class="note">Any query not matched will be forwarded to the AI backend.</p>
+				<ul>
+					<li>Ask anything — JARVIS will try to answer using AI</li>
+				</ul>
+			</section>
+
+			<!-- Card: Examples -->
+			<section class="card wide" data-section="examples">
+				<h2>Example Queries</h2>
+				<p class="note">Copy/paste or speak these to try features fast.</p>
+				<div class="examples">
+					<button class="cmd">open instagram</button>
+					<button class="cmd">close chrome</button>
+					<button class="cmd">search python tutorials</button>
+					<button class="cmd">wikipedia Albert Einstein</button>
+					<button class="cmd">translate hello in spanish</button>
+					<button class="cmd">write what I say</button>
+					<button class="cmd">send message to John Hello, how are you?</button>
+					<button class="cmd">send whatsapp message to Alice Good morning!</button>
+					<button class="cmd">take screenshot</button>
+					<button class="cmd">volume up</button>
+					<button class="cmd">shutdown the system</button>
+					<button class="cmd">weather in London</button>
+					<button class="cmd">reset memory</button>
+				</div>
+			</section>
+
+		</main>
+
+		<footer class="footer">Made with ❤️ — Inspired by Iron Man's JARVIS</footer>
+
+		<script>
+			// simple search/filter
+			const search = document.getElementById('search');
+			const cards = Array.from(document.querySelectorAll('.card'));
+
+			search.addEventListener('input', (e) => {
+				const q = e.target.value.toLowerCase().trim();
+				cards.forEach(card => {
+					const text = card.textContent.toLowerCase();
+					card.style.display = text.includes(q) ? '' : 'none';
+				});
+			});
+
+			// copy example command to clipboard on click
+			document.querySelectorAll('.cmd').forEach(btn => {
+				btn.addEventListener('click', async () => {
+					try {
+						await navigator.clipboard.writeText(btn.textContent);
+						btn.classList.add('copied');
+						setTimeout(() => btn.classList.remove('copied'), 1000);
+					} catch (err) {
+						console.warn('Clipboard error', err);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
