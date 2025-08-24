@@ -1,8 +1,4 @@
 # File Tree: JARVIS 2.0
-
-Generated on: 8/24/2025, 3:41:51 PM
-Root path: `f:\Codes\PROJECTS\JARVIS 2.0`
-
 ```
 ├── 📁 .git/ 🚫 (auto-hidden)
 ├── 📁 .venv/ 🚫 (auto-hidden)
