@@ -8,3 +8,5 @@ wikipedia
 requests
 langdetect
 pillow
+PyWhatKit
+pyperclip

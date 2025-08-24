@@ -68,6 +68,9 @@ def open_app(app_name):
             pyautogui.press('enter')
             speak(f'Opening {app_name}')
 
+
+
+
 def close_app(app_name):
     ps_script = '''
         Get-Process | Select-Object Id, ProcessName, Description | Sort-Object ProcessName | ConvertTo-Json
@@ -102,17 +105,5 @@ def close_app(app_name):
         speak(f'The app is already closed')
         print(f"Error closing {app_name}: {e}")
         
-
-def screenshot():
-    img = pyautogui.screenshot()
-    try:
-        name = datetime.datetime.now().strftime("%Y-%m-%d %I-%M %p")
-        img.save(f"assets/screenshots/{name}.png")
-        speak('Screenshot taken')
-    
-    except Exception as e:
-        speak('Could not take screenshot. Please try again.')
-        print(f'Error taking screenshot: {e}')
-
 
 

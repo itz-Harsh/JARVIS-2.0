@@ -1,4 +1,4 @@
-import os , pyautogui
+import os , pyautogui , datetime
 from voice_io import speak
 
 
@@ -15,5 +15,14 @@ def music_control(command):
         speak('Please say play or stop or pause')
         
 
-# music_control('play')
-music_control('pause')
+def screenshot():
+    img = pyautogui.screenshot()
+    try:
+        name = datetime.datetime.now().strftime("%Y-%m-%d %I-%M %p")
+        img.save(f"assets/screenshots/{name}.png")
+        speak('Screenshot taken')
+    
+    except Exception as e:
+        speak('Could not take screenshot. Please try again.')
+        print(f'Error taking screenshot: {e}')
+

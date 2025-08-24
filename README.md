@@ -1,79 +1,121 @@
 # JARVIS 2.0 🤖✨
 
-A local voice assistant written in Python. JARVIS 2.0 provides speech input/output, system controls, web searches, Wikipedia summaries, translations, and optional AI replies using the Google Generative AI SDK.
+Welcome to JARVIS 2.0 — a local, modular voice assistant for Windows built with Python. This project provides speech input/output, system control helpers, web/search utilities, translation, screenshots, messaging helpers, and an optional AI conversational backend.
 
-## 📁 What this repository contains
+## 📁 Project structure
 
-- `src/` — Python source modules (voice I/O, core actions, smart helpers, AI integration).
-- `assets/lang.json` — language mappings used by translation features.
-- `requirements.txt` — Python dependencies.
+- `src/` — core Python modules (voice_io, Basic, smart, system, multimedia, Brain)
+- `assets/` — language mappings, contacts, screenshots
+- `requirements.txt` — Python dependencies
+- `commands.txt` — supported voice commands reference
 
-## ✨ Features (for future updates)
+## ✨ Key features
 
-- 🎙️ Voice Input/Output – Talk to Jarvis naturally
-- ⛅ Weather Updates – Live weather from OpenWeather API
-- 🌍 Language Translation – Auto-responds in your language
-- 🔊 System Controls – Manage volume, brightness, WiFi, Bluetooth
-- 🔐 PC Sign-In Automation – Auto-type your PIN at login
-- 🗣️ Text-to-Speech (TTS) – Supports multiple voices
-- ⚡ Modular Commands – Easy to extend with new features
+- 🎙️ Voice Input/Output — Speak naturally to JARVIS using your microphone
+- 🌐 Web searches & Wikipedia — quick information retrieval
+- ⛅ Weather — live weather via OpenWeather API
+- 🌍 Translation — translate and auto-type translated text
+- 🔊 System controls — volume, brightness, shutdown, restart, lock
+- 📸 Screenshots — take and open saved screenshots
+- � Messaging helpers — send WhatsApp messages (via pywhatkit) and load contacts from `assets/Contacts.vcf`
+- 🧠 AI integration — optional Google Generative AI (Gemini) for conversational replies and code generation
+- ⚡ Modular commands — add new features by editing `src/` modules
 
 _Inspired by Iron Man's virtual assistant — JARVIS._
 
-## 🛠️ Tech Stack
+## 🛠️ Tech stack
 
-- 🐍 Python 3.13
-- 🎤 SpeechRecognition (voice input)
-- 🔊 pyttsx3 / alternatives (text-to-speech)
-- 🌐 OpenWeather API (weather)
-- 🌍 LibreTranslate API (translation)
-- 💻 PyAutoGUI (PC automation)
-- ⚡ Custom Commands Framework
+- Python 3.8+ (project includes some .pyc built for 3.13)
+- google-generativeai (optional, for AI replies)
+- speech_recognition, pyttsx3 (voice I/O)
+- pyautogui (automation & screenshots)
+- requests, wikipedia, langdetect, pywhatkit
+- python-dotenv (load `.env` keys)
 
-## ✅ Requirements
+## ✅ Requirements (short)
 
-- Windows (tested)
-- Python 3.8+ (recommended 3.13 for parity with compiled files)
-- Microphone and speaker access for voice features
+- Windows (features use Windows-specific commands)
+- Microphone & speakers
+- Python 3.8+
+- Install dependencies from `requirements.txt`
 
 ## ⚙️ Install (PowerShell)
 
 ```powershell
-# create and activate a virtual environment
+# from project root
 python -m venv .venv
-.\\.venv\\Scripts\\Activate.ps1
-
-# install dependencies
+.\.venv\Scripts\Activate.ps1
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-## 🔐 Environment
+Notes:
+- If `PyAudio` fails to install on Windows, use a prebuilt wheel or consider `sounddevice` as an alternative.
+- `pyttsx3` voice indices differ per system — inspect available voices and choose a valid index.
 
-Create a `.env` file at the project root with any required secrets. Example:
+## 🔐 Environment variables
+
+Create a `.env` file in the project root. Example:
 
 ```
 ai-api-key=YOUR_GOOGLE_GENERATIVE_API_KEY
 OPENWEATHER_API_KEY=YOUR_OPENWEATHER_KEY
 ```
 
-`src/Brain.py` reads `ai-api-key` from the environment for AI queries. Other modules may expect additional keys (for example, weather).
+- `ai-api-key` (optional) — used by `src/Brain.py` for Gemini-based replies
+- `weather-api` / `OPENWEATHER_API_KEY` — used by `src/smart.py` for weather lookups
 
-## 🛠️ Notes & Troubleshooting
+## ▶️ How to run
 
-- Microphone permissions: ensure your OS allows Python to access the microphone.
-- `pyttsx3` voice index varies by system. If `voices[2]` raises an IndexError, print `voices` and pick an available index.
-- `pyautogui` may require additional OS dependencies on Windows — check the package docs if installs fail.
+The assistant entrypoint is `src/main.py`.
 
-## 📂 Assets
+Run from project root (PowerShell):
 
-- `assets/lang.json` is required by the translation feature. Keep it in the `assets/` folder.
+```powershell
+python -m src.main
+```
 
-## ➕ Next steps you might want
+Or run interactively in a REPL to test functions:
 
-- Add driver code to `src/main.py` to wire voice commands to the functions in `src/`.
-- Add unit tests for core functions.
-- Add a `.env.example` and `CONTRIBUTING.md` for contributors.
+```powershell
+python
+>>> from src.voice_io import speak
+>>> speak('Hello from JARVIS')
+```
 
-If you'd like, I can add a `.env.example`, create a minimal runnable `src/main.py` demo, or add a small test file — tell me which and I will implement it.
+## 📚 Supported commands
 
+See `commands.txt` for the full list of supported voice commands and examples. The file is kept updated as features are added.
+
+## ⚙️ Implementation notes
+
+- `src/voice_io.py` uses `speech_recognition` to listen and `pyttsx3` for TTS.
+- `src/Basic.py` implements app launching, web search, and screenshots.
+- `src/smart.py` handles Wikipedia, translation, notepad writing, weather, and messaging helpers.
+- `src/system.py` exposes system-level actions (volume/brightness/shutdown/restart/lock/usage).
+- `src/Brain.py` wires to Google Generative AI and persists chat history in `src/memory/chat_memory.json`.
+
+## 🛠️ Troubleshooting & tips
+
+- Microphone timeout/recognition: increase timeout in `src/voice_io.py` if your mic is slow.
+- pyttsx3 voices: if `voices[2]` fails, list `engine.getProperty('voices')` and choose a valid index.
+- Permissions: grant microphone access to Python and your terminal.
+- PyAutoGUI: may require Pillow and OS-level support — ensure dependencies in `requirements.txt` are installed.
+
+## 🧪 Testing suggestions
+
+- Add a small test script under `tests/` that mocks `voice()` and verifies handlers in `src/main.py` call the right functions.
+
+## ➕ Contributing
+
+1. Fork the repo
+2. Create a topic branch
+3. Add tests for new behavior
+4. Open a PR with a clear description
+
+If you'd like, I can add a `.env.example`, a small `tests/` harness, or a minimal `src/main.py` demo with a dry-run mode. Tell me which and I'll implement it.
+
+---
+Small note: this README is kept intentionally developer-focused. If you want a shorter "Getting Started" or a visual quickstart with screenshots and emoji badges, tell me which style you prefer and I will update it.
+
+Made with ❤️ by Harsh 

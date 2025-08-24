@@ -3,16 +3,25 @@
 ## General
 - exit / quit / goodbye / stop listening
 - wish me (auto greeting)
+- reset memory / clear memory (clear AI chat history)
 
-## Web & Search
-- wikipedia [topic]
-- search [query]
+## Web & App Control
 - open [app/website]
+- close [app]
+- search [query]
+
+## Wikipedia & Info
+- wikipedia [topic]
 
 ## Translation & Notes
 - translate [text] in [language]
 - write a note
 - write to file
+- write what I say (dictation to notepad)
+
+## Messaging
+- send message to [name] [message]
+- send whatsapp message to [name] [message]
 
 ## Screenshots & Multimedia
 - screenshot / take screenshot
@@ -21,11 +30,8 @@
 - stop music / stop song / pause music / pause song
 
 ## System Controls
-- volume up
-- volume down
-- mute
-- brightness up
-- brightness down
+- volume up / volume down / mute
+- brightness up / brightness down
 - time / date
 - shutdown the system / shut down the system
 - restart the system / reboot the system
@@ -33,18 +39,28 @@
 - cpu usage / system usage / how much memory is used
 
 ## Weather
-- weather of [city]
+- weather in [city]
+
+## AI Standby
+- [any other query] (will be answered by AI)
 
 ## Example Queries
 - open instagram
+- close chrome
 - search python tutorials
 - wikipedia Albert Einstein
 - translate hello in spanish
+- write what I say
+- send message to John Hello, how are you?
+- send whatsapp message to Alice Good morning!
 - take screenshot
+- show screenshots
 - play music
+- stop music
 - volume up
 - brightness down
 - shutdown the system
-- weather of London
+- weather in London
+- reset memory
 
 # You can extend this list by adding new features and commands in the code!

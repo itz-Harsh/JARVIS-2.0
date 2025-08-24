@@ -6,6 +6,7 @@
 │   ├── 📁 screenshots/ 🚫 ((empty at Start))
 │   ├── 📁 savefile/ 🚫 ((empty at Start))
 │   └── 📄 lang.json
+│   └── 📄 Contacts.vcf 🚫 (auto-hidden)
 ├── 📁 src/
 ├── ├── 📁 memory/
 │        └── 📄 chat_memory.json 🚫 (empty at Start)

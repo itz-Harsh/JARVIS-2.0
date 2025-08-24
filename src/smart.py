@@ -1,13 +1,14 @@
 import wikipedia
 import requests
 import pyautogui , pyperclip
-import time
+import time 
 from voice_io import speak , voice
 import json , os
 from langdetect import detect
 from Basic import open_app
 from dotenv import load_dotenv
 from Brain import ai_query
+import pywhatkit as whatsapp
 
 load_dotenv()
 
@@ -51,15 +52,14 @@ def translate(query):
         raise Exception(f"Translation API error: {res.status_code}")
     speak(f'Translating {text} in {langto} ')
     respone = res.json().get("translation", "No translation found.")
-    print(respone)
+    # print(respone)
     return respone
 
 def write_to_file( command ):
+    speak('Opening Notepad for writing.')
     writing= True
     try:
-        # new page in notepad
         open_app('notepad')
-        speak('Opening Notepad')
         time.sleep(1)
         if 'write what i say' in command:
             speak('Please say what you want to write')
@@ -80,6 +80,7 @@ def write_to_file( command ):
             else:
                 pyautogui.typewrite(res) 
             speak('Writing completed, Sir')
+            return 
 
                   
             
@@ -90,8 +91,7 @@ def write_to_file( command ):
         
         
 def weather(query):
-    city = query.replace('weather of', '').strip()
-    
+    city = query.split('weather in', 1)[1].strip()
     apikey = os.getenv('weather-api')
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     
@@ -109,8 +109,64 @@ def weather(query):
         speak(f'''Sorry I Couldn't found City''')
 
 
-while True:
-    cmd =voice()
-    if 'write' in cmd: 
-        write_to_file(cmd)
+
+
+VCF_PATH = os.path.join(os.path.dirname(__file__), "..", "assets", "Contacts.vcf")
+VCF_PATH = os.path.abspath(VCF_PATH)
+
+VCF_FILE = os.path.join("assets", "Contacts.vcf")
+def load_contacts():
+    contacts = {}
+    current_name = None
+    current_numbers = []
+
+    if not os.path.exists(VCF_FILE):
+        print("❌ Contacts file not found.")
+        return {}
+
+    with open(VCF_FILE, "r", encoding="utf-8", errors="ignore") as f:
+        for line in f:
+            line = line.strip()
+
+            if line.startswith("FN:"):  # Full name
+                current_name = line[3:]
+                current_numbers = []
+
+            elif line.startswith("TEL"):  # TEL;CELL , TEL;WORK , etc.
+                number = line.split(":")[-1]
+                current_numbers.append(number)
+
+            elif line.startswith("END:VCARD"):
+                if current_name:
+                    contacts[current_name] = current_numbers
+                current_name = None
+                current_numbers = []
+
+    return contacts
+
+def find_contact(name, contacts):
+    """Search contact by name (case-insensitive)."""
+    for contact_name, numbers in contacts.items():
+        if name.lower() in contact_name.lower():
+            # if only one number → return it
+            if len(numbers) == 1:
+                return numbers[0]
+            # if multiple numbers → prefer the last (PREF is usually last in vcf)
+            return numbers[-1]
+    return None
+
+
+
+
+contacts = load_contacts()
+def send_message(message):
+    msg = message.replace('send message to', '').strip()
+    name = msg.split(' ',1)[0].strip()
+    msg = msg.split(' ',1)[1].strip()
+    if name in contacts:
+        number = find_contact(name, contacts)
+        whatsapp.sendwhatmsg_instantly(number, message, wait_time=10, tab_close=True)
+        print(f"Message sent to {name.title()} ({number})")
+    else:
+        print("Contact not found!")
         

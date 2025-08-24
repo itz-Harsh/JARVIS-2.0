@@ -1,6 +1,18 @@
+# Environment variables
 .env
+
+# Chat memory file
 src/memory/chat_memory.json
+
+# Contacts file
+/assets/Contacts.vcf
+
+
+# Python cache files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# Whatapp messages database
+PyWhatKit_DB.txt

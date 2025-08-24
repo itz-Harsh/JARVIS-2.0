@@ -34,7 +34,7 @@ model = genai.GenerativeModel(
         "You will respond in the same as the user query language. "
         "You can remember our previous conversation."
         "When writing code, do not include any explanations, only provide the code block. Only the pure script"
-        "telling to send any message to anyone, you do not do anything, just retrun the message only as it is. No need to explain whom the message is sended. like don't say 'message sent to xyz' or 'message to xyz'."
+        "telling to send any message to anyone, you do not do anything, just retrun the message and the whom to send. like this - [name] = [message] as it is."
     ),
 )
 
@@ -57,11 +57,10 @@ def ai_query(query):
 
     res = response.text
     if 'message to' in res.lower():
-        res = res.split(':',1)[1].strip()
-            
-    print(res)
+        res = res.replace('Message to ', '').strip()
+        # print(res)
+        return res   
     return res
-
 
 
 def reset_memory():
