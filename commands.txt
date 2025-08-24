@@ -1,0 +1,50 @@
+# JARVIS 2.0 - Supported Voice Commands
+
+## General
+- exit / quit / goodbye / stop listening
+- wish me (auto greeting)
+
+## Web & Search
+- wikipedia [topic]
+- search [query]
+- open [app/website]
+
+## Translation & Notes
+- translate [text] in [language]
+- write a note
+- write to file
+
+## Screenshots & Multimedia
+- screenshot / take screenshot
+- show screenshots / show screenshot
+- play music / play song
+- stop music / stop song / pause music / pause song
+
+## System Controls
+- volume up
+- volume down
+- mute
+- brightness up
+- brightness down
+- time / date
+- shutdown the system / shut down the system
+- restart the system / reboot the system
+- sign out / log off
+- cpu usage / system usage / how much memory is used
+
+## Weather
+- weather of [city]
+
+## Example Queries
+- open instagram
+- search python tutorials
+- wikipedia Albert Einstein
+- translate hello in spanish
+- take screenshot
+- play music
+- volume up
+- brightness down
+- shutdown the system
+- weather of London
+
+# You can extend this list by adding new features and commands in the code!

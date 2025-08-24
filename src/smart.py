@@ -1,13 +1,15 @@
 import wikipedia
 import requests
-import pyautogui
+import pyautogui , pyperclip
 import time
 from voice_io import speak , voice
-import json
+import json , os
 from langdetect import detect
 from Basic import open_app
+from dotenv import load_dotenv
+from Brain import ai_query
 
-
+load_dotenv()
 
 global json_data;
 json_data = {}
@@ -52,27 +54,63 @@ def translate(query):
     print(respone)
     return respone
 
-def write_to_file():
+def write_to_file( command ):
     writing= True
     try:
-        # write to notepad
-        speak('Opening Notepad to write ')
+        # new page in notepad
         open_app('notepad')
+        speak('Opening Notepad')
         time.sleep(1)
-        speak('Please say what you want to write')
-        while writing:
-            text = voice()
-            if 'stop writing' in text.lower():
-                speak('Stopping writing')
-                writing = False
+        if 'write what i say' in command:
+            speak('Please say what you want to write')
+            while writing:
+                text = voice()
+                if 'stop writing' in text.lower():
+                    speak('Stopping writing')
+                    writing = False
+                else:
+                    pyautogui.typewrite(text)
+                    pyautogui.press('enter')
+        else:
+            res = ai_query(command)
+            lang = detect(res)
+            if lang != 'en':
+                pyperclip.copy(res)
+                pyautogui.hotkey("ctrl", "v")
             else:
-                pyautogui.typewrite(text)
-                pyautogui.press('enter')
-                
+                pyautogui.typewrite(res) 
+            speak('Writing completed, Sir')
+
+                  
             
     except Exception as e:
         speak('Could not open Notepad. Please try again.')
         print(f'Error opening Notepad: {e}')
         writing = False        
         
+        
+def weather(query):
+    city = query.replace('weather of', '').strip()
+    
+    apikey = os.getenv('weather-api')
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    
+    respone = requests.get(f"{base_url}appid={apikey}&q={city}&units=metric")
+    res  = respone.json()
+    if res["cod"] != "404":
+        result = {
+            "In" : res["name"],
+            "temperature is" : f'{int(res["main"]["temp"])} Degrees Celsius',
+            "and it probably" : res["weather"][0]["description"],
+        }
+        for key , value in result.items():
+            speak(f'{key} {value}')
+    else:
+        speak(f'''Sorry I Couldn't found City''')
+
+
+while True:
+    cmd =voice()
+    if 'write' in cmd: 
+        write_to_file(cmd)
         

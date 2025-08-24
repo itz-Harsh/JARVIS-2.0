@@ -1,1 +1,6 @@
 .env
+src/memory/chat_memory.json
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

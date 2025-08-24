@@ -1,8 +1,10 @@
 google-generativeai
 python-dotenv
 pyttsx3
-speechrecognition
+SpeechRecognition
+PyAudio
 pyautogui
 wikipedia
 requests
 langdetect
+pillow

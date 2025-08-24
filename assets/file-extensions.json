@@ -1,0 +1,22 @@
+{
+    "json": [".json"],
+    "python": [".py"],
+    "text": [".txt"],
+    "markdown": [".md"],
+    "html": [".html"],
+    "css": [".css"],
+    "javascript": [".js"],
+    "java": [".java"],
+    "csharp": [".cs"],
+    "cplusplus": [".cpp"],
+    "c" : [".c"],
+    "ruby": [".rb"],
+    "php": [".php"],
+    "go": [".go"],
+    "shell": [".sh"],
+    "yaml": [".yml", ".yaml"],
+    "xml": [".xml"],
+    "ini": [".ini"],
+    "csv": [".csv"],
+    "excel": [".xls", ".xlsx"]
+}

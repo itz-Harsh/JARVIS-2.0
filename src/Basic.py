@@ -7,6 +7,7 @@ import subprocess
 import webbrowser
 from voice_io import speak, voice
 
+
 # in 12 hours
 
 
@@ -100,6 +101,18 @@ def close_app(app_name):
     except Exception as e:
         speak(f'The app is already closed')
         print(f"Error closing {app_name}: {e}")
+        
 
-        
-        
+def screenshot():
+    img = pyautogui.screenshot()
+    try:
+        name = datetime.datetime.now().strftime("%Y-%m-%d %I-%M %p")
+        img.save(f"assets/screenshots/{name}.png")
+        speak('Screenshot taken')
+    
+    except Exception as e:
+        speak('Could not take screenshot. Please try again.')
+        print(f'Error taking screenshot: {e}')
+
+
+
