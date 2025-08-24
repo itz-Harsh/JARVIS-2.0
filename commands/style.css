@@ -6,7 +6,9 @@
   --accent-2: #6be4ff;
   --glass: rgba(255, 255, 255, 0.03);
 }
-
+a:hover{
+    color: rgb(202, 202, 202);
+}
 * {
   box-sizing: border-box;
 }
