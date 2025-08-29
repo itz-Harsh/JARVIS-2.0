@@ -43,7 +43,9 @@ if __name__ == '__main__':
                 speak(keyControl.redo())
             
             elif 'save as' in query:
-                speak(keyControl.saveas())
+                file = voice()
+                speak(keyControl.saveas(query= file))
+
                        
             elif 'save' in query:
                 speak(keyControl.save())

@@ -52,7 +52,7 @@ def switchwindow():
     return 'switched window'    
 
 def saveas( query ):
-    name = query.replace('save this file as', '').strip()
+    name = query.split('as' , 1)[1].strip()
     path = os.path.abspath(__file__).replace('src\\keyControl.py', f'assets\\savefile\\{name}')
     pyautogui.hotkey('ctrl', 'shift', 's')
     time.sleep(3)
@@ -60,4 +60,5 @@ def saveas( query ):
     time.sleep(2)
     pyautogui.press('enter')
     return 'file saved'
+
 
