@@ -19,7 +19,7 @@ website = {
     'whatsapp': 'https://web.whatsapp.com',
     'amazon' : 'https://www.amazon.in',
     'flipkart': 'https://www.flipkart.com',
-    
+    'youtube' : 'https://www.youtube.com'
 }
 
 
@@ -44,14 +44,20 @@ def wish():
         speak("Good Evening Sir! \nHope you are doing well")
 
 def search(query):
+    query = query.split('search' , 1)[0].strip()
+    print(query)
+    
     if 'youtube' in query:
         query = query.replace('on youtube', '')
         speak(f'Searching {query} on YouTube .....')
         webbrowser.open(f'https://www.youtube.com/results?search_query={query}')
     else:
+        if 'on google' in query:
+            query = query.replace('on google', "").strip()
         speak(f'Searching {query} on Google ....')
-        webbrowser.open(f'https://www.google.com/search?q={query}')
+        webbrowser.open(f'https://www.google.com/search?q='+query)
         
+
 
 def open_app(app_name):
     if app_name in website:

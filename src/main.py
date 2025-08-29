@@ -11,7 +11,9 @@ if __name__ == '__main__':
         
         try:
             query = voice()
-            
+        
+        
+    # Basic.py
             if 'open' in query:
                 app_name = query.replace('open ', '')
                 b.open_app(app_name)
@@ -22,6 +24,9 @@ if __name__ == '__main__':
             
             elif 'wish me' in query:
                 b.wish()
+                
+            elif 'search' in query:
+                b.search()
     
     #  KeyControl.py calls
             elif 'select all' in query or 'select everything' in query:
@@ -96,16 +101,25 @@ if __name__ == '__main__':
                 sm.send_whatsapp_message(query)
 
     #    Multimedia.py calls
-        
+
+            
             elif 'take screenshot' in query:
                 multi.screenshot()
                 
             elif 'show screenshot' in query:
                 multi.show_screenshot()
                 
-            elif 'play music' in query or 'play song' in query:
-                multi.music_control('play')
+            elif 'play' in query or 'play song' in query:
                 
+                    for word in ["song", "music"]:
+                            query = query.replace(word, "")
+
+                    query = query.strip()
+                    if len(query) == 4:
+                        multi.music_control('play')
+                    else:
+                        multi.play(query)
+
             elif 'stop music' in query or 'stop song' in query or 'pause music' in query or 'pause song' in query:
                 multi.music_control('pause')
             

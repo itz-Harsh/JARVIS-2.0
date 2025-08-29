@@ -22,7 +22,7 @@ with open('assets/lang.json', 'r') as file:
 
 
 def wikipedia_summary(query):
-    query = query.replace('wikipedia', '')
+    query = query.split('wikipedia' or 'about', 1)[1].strip()
     speak(f'Searching {query} on Wikipedia ....')
     try:
         summary = wikipedia.summary(query, sentences=2)
@@ -34,6 +34,9 @@ def wikipedia_summary(query):
         speak(f'No page found for "{query}". Please try a different query.')
     except Exception as e:
         speak('An error occurred while searching Wikipedia.')
+
+
+
 
 
 def translate(query):

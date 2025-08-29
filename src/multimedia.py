@@ -1,5 +1,20 @@
-import os , pyautogui , datetime
+import  os , pyautogui , datetime , time
 from voice_io import speak
+from Basic import open_app
+
+
+def play( src ):
+    speak(f'Yes Sir, Playing {src} on spotify')
+    src = src.split('play' , 1)[1].strip()
+    open_app('spotify')
+    time.sleep(5)
+    pyautogui.hotkey('ctrl' , 'k')
+    time.sleep(1)
+    pyautogui.write(src)
+    time.sleep(1)
+    pyautogui.press('enter')
+    pyautogui.press('enter')
+
 
 
 def show_savefile():

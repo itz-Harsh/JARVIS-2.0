@@ -2,7 +2,6 @@ import speech_recognition as sr
 import pyttsx3
 
 def speak(text):
-    print(text)
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[2].id) 
