@@ -39,6 +39,39 @@ _Inspired by Iron Man's virtual assistant — JARVIS._
 - Python 3.8+
 - Install dependencies from `requirements.txt`
 
+## 🗂️ File Structure
+
+Visual project tree (embedded):
+
+```
+# File Tree: JARVIS 2.0
+├── 📁 .git/ 🚫 (auto-hidden)
+├── 📁 .venv/ 🚫 (auto-hidden)
+├── 📁 assets/
+│   ├── 📁 screenshots/ 🚫 ((empty at Start))
+│   ├── 📁 savefile/ 🚫 ((empty at Start))
+│   └── 📄 lang.json
+│   └── 📄 Contacts.vcf 🚫 (auto-hidden)
+├── 📁 src/
+├── ├── 📁 memory/
+│        └── 📄 chat_memory.json 🚫 (empty at Start)
+│   ├── 📁 __pycache__/ 🚫 (auto-hidden)
+│   ├── 🐍 Basic.py
+│   ├── 🐍 Brain.py
+│   ├── 🐍 main.py
+│   ├── 🐍 multimedia.py
+│   ├── 🐍 smart.py
+│   ├── 🐍 system.py
+│   └── 🐍 voice_io.py
+├── 🔒 .env 🚫 (auto-hidden)
+├── 🚫 .gitignore
+├── 📖 README.md
+├── 📄 commands.txt
+└── 📄 requirements.txt
+```
+
+You can also view the same content in the sibling file [`FileTree.txt`](./FileTree.txt).
+
 ## ⚙️ Install (PowerShell)
 
 ```powershell

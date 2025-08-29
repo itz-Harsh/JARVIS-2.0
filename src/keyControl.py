@@ -1,6 +1,7 @@
 import pyautogui
 from voice_io import speak , voice
-import time
+import time , os
+
 
 
 def selectall():
@@ -50,13 +51,13 @@ def switchwindow():
     pyautogui.hotkey('alt', 'tab')
     return 'switched window'    
 
-def saveas():
+def saveas( query ):
+    name = query.replace('save this file as', '').strip()
+    path = os.path.abspath(__file__).replace('src\\keyControl.py', f'assets\\savefile\\{name}')
     pyautogui.hotkey('ctrl', 'shift', 's')
     time.sleep(3)
-    speak('Please provide the file name')
-    name = voice()
-    pyautogui.typewrite(name)
+    pyautogui.typewrite(path)
     time.sleep(2)
     pyautogui.press('enter')
-    return 'save as window opened'
+    return 'file saved'
 

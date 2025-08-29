@@ -4,6 +4,7 @@
 ├── 📁 .venv/ 🚫 (auto-hidden)
 ├── 📁 assets/
 │   ├── 📁 screenshots/ 🚫 ((empty at Start))
+│   ├── 📁 savefile/ 🚫 ((empty at Start))
 │   └── 📄 lang.json
 │   └── 📄 Contacts.vcf 🚫 (auto-hidden)
 ├── 📁 src/
@@ -23,6 +24,4 @@
 ├── 📄 commands.txt
 └── 📄 requirements.txt
 ```
-
----
 

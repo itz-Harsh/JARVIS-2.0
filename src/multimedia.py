@@ -2,11 +2,20 @@ import os , pyautogui , datetime
 from voice_io import speak
 
 
+def show_savefile():
+    speak('Yes Sir, this are the savefiles')
+    path = os.path.dirname(os.path.abspath(__file__)).replace('src', 'assets\\savefile')
+    os.startfile(path)
+
+
+
 def show_screenshot():
-    speak('Yes Sir, this are the screenshots that are taken till now')
+    speak('Yes Sir, this are the screenshots')
     dir = os.path.dirname(os.path.abspath(__file__)).replace('src', 'assets\\screenshots')
     os.startfile(dir)    
     
+    
+
 
 def music_control(command):
     if 'play' or 'stop' in command or 'pause' in command:

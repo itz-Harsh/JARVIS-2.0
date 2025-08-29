@@ -18,7 +18,8 @@ __pycache__/
 PyWhatKit_DB.txt
 
 # ScreenShots
-screenshots/
+assets/screenshots/*
 
 #savefile
-savefile/
+assets/savefile/*
+    
