@@ -16,3 +16,9 @@ __pycache__/
 
 # Whatapp messages database
 PyWhatKit_DB.txt
+
+# ScreenShots
+screenshots/
+
+#savefile
+savefile/

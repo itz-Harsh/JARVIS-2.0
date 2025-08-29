@@ -1,6 +1,6 @@
 import wikipedia
 import requests
-import pyautogui , pyperclip
+import pyautogui , pyperclip , keyControl
 import time 
 from voice_io import speak , voice
 import json , os
@@ -56,11 +56,12 @@ def translate(query):
     return respone
 
 def write_to_file( command ):
-    speak('Opening Notepad for writing.')
+    # speak('Opening Notepad for writing.')
     writing= True
     try:
         open_app('notepad')
         time.sleep(1)
+        keyControl.newfile()
         if 'write what i say' in command:
             speak('Please say what you want to write')
             while writing:
@@ -88,6 +89,10 @@ def write_to_file( command ):
         speak('Could not open Notepad. Please try again.')
         print(f'Error opening Notepad: {e}')
         writing = False        
+
+
+
+
         
         
 def weather(query):
