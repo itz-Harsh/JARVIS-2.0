@@ -152,28 +152,30 @@ def load_contacts():
 
     return contacts
 
-def find_contact(name, contacts):
-    """Search contact by name (case-insensitive)."""
-    for contact_name, numbers in contacts.items():
-        if name.lower() in contact_name.lower():
-            # if only one number → return it
-            if len(numbers) == 1:
-                return numbers[0]
-            # if multiple numbers → prefer the last (PREF is usually last in vcf)
-            return numbers[-1]
-    return None
-
-
-
-
 contacts = load_contacts()
+
+def clean_contacts(data, keep="first"):
+    cleaned = {}
+    for name, numbers in data.items():
+        unique = list(dict.fromkeys(numbers))  # remove duplicates, keep order
+        if unique:
+            if keep == "first":
+                cleaned[name.lower()] = unique[0]   # keep first number
+            else:
+                cleaned[name.lower()] = unique[-1]  # keep last number
+    return cleaned
+
+contact_list =  clean_contacts(contacts, keep="first")
+
 def send_message(message):
     msg = message.replace('send message to', '').strip()
     name = msg.split(' ',1)[0].strip()
     msg = msg.split(' ',1)[1].strip()
-    if name in contacts:
-        number = find_contact(name, contacts)
-        whatsapp.sendwhatmsg_instantly(number, message, wait_time=10, tab_close=True)
+
+    if name.lower() in contact_list:
+        number = contact_list[name]
+        print(number)
+        whatsapp.sendwhatmsg_instantly(number, msg, wait_time=20, tab_close=True)
         print(f"Message sent to {name.title()} ({number})")
     else:
         print("Contact not found!")

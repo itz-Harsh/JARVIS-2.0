@@ -23,6 +23,7 @@ if os.path.exists(HISTORY_FILE):
         history = json.load(f)
 else:
     history = []
+    
 
 # Model setup
 model = genai.GenerativeModel(
@@ -36,6 +37,7 @@ model = genai.GenerativeModel(
         "When writing code, do not include any explanations, only provide the code block. Only the pure script"
         "telling to send any message to anyone, you do not do anything, just retrun the message and the whom to send. like this - [name] = [message] as it is."
         "if you are asked to do copy paste save delete or any operations stay quiet and do not say anything. no need to respond."
+        "Creator of this project is 'Harsh Suthar', A Computer Engineer from India , Creator of you is Harsh Suthar."
     ),
 )
 

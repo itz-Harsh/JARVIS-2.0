@@ -53,7 +53,10 @@ def switchwindow():
 
 def saveas( query ):
     name = query.split('as' , 1)[1].strip()
-    path = os.path.abspath(__file__).replace('src\\keyControl.py', f'assets\\savefile\\{name}')
+    loc = os.path.abspath(__file__).replace('src\\keyControl.py', f'assets\\savefile\\')
+    if not os.path.exists(loc):
+        os.makedirs(loc)
+    path = os.path.join(loc, name)
     pyautogui.hotkey('ctrl', 'shift', 's')
     time.sleep(3)
     pyautogui.typewrite(path)

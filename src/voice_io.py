@@ -5,7 +5,7 @@ def speak(text):
     engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[2].id) 
-    engine.setProperty('rate', 160)  
+    engine.setProperty('rate', 190)  
     engine.say(text)
     engine.runAndWait()
     
@@ -17,18 +17,15 @@ def voice():
     r = sr.Recognizer()
     listen = True
     while listen:
+        with sr.Microphone() as source:
+            print('Listening....')
+            audio = r.listen(source , timeout=5 )            
+            print('Recognizing....')
         try:
-            with sr.Microphone() as source:
-                print('Listening....')
-                audio = r.listen(source , timeout=5 )
-                print('Recognizing....')
                 query = r.recognize_google(audio , language='en-in')
                 print(f'You Said : {query}')
                 listen = False        
-        except sr.WaitTimeoutError:
+        except Exception as e:
             pass
-
-            
     return query.lower()
-
 

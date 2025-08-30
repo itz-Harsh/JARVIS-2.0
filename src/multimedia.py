@@ -43,10 +43,16 @@ def screenshot():
     img = pyautogui.screenshot()
     try:
         name = datetime.datetime.now().strftime("%Y-%m-%d %I-%M %p")
-        img.save(f"assets/screenshots/{name}.png")
+        path = f'assets/screenshots/'
+        # if no path exists, create it
+        if not os.path.exists(path):
+            os.makedirs(path)
+        
+        img.save(f'{path}{name}.png')
         speak('Screenshot taken')
     
     except Exception as e:
         speak('Could not take screenshot. Please try again.')
         print(f'Error taking screenshot: {e}')
+
 

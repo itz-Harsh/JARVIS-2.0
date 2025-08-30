@@ -77,6 +77,8 @@ def open_app(app_name):
 
 
 
+
+
 def close_app(app_name):
     ps_script = '''
         Get-Process | Select-Object Id, ProcessName, Description | Sort-Object ProcessName | ConvertTo-Json

@@ -39,7 +39,8 @@ def date_time():
     res = now.strftime("%Y-%m-%d %I:%M %p")
     day = calendar.day_name[now.weekday()]
     print(f'The current date and time is {res}\n and the day is {day}')
-    return res
+    return res , day
+
 
 def shutdown():
     speak("Shutting down the system")
